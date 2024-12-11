@@ -71,7 +71,6 @@ const InsertData = (data) => {
     temp = data.split(/\r?\n/);
     for(let i = 0; i < temp.length; i++){
         const split = temp[i].split('   ');
-        if(left[i] < split[0]);
         left.push(split[0]);
         right.push(split[1]);
     }
