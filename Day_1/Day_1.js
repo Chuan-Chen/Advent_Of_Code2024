@@ -45,7 +45,8 @@ Your actual left and right lists contain many location IDs. What is the total di
 const fs = require('node:fs');
 let left = [];
 let right = [];
-
+let distance = [];
+let distanceTotal = 0;
 
 const  file = fs.readFile('./Day_1_Input.txt', 'utf8', (err , data ) => {
     if (err) {
@@ -53,7 +54,18 @@ const  file = fs.readFile('./Day_1_Input.txt', 'utf8', (err , data ) => {
       return;
     }
     InsertData(data);
+    QuickSort(left, 0, left.length-1);
+    QuickSort(right, 0, right.length-1);
+    CalculateDistance(left, right);
+    distanceTotal = Sum(distance);
+    console.log(distanceTotal);
 });
+
+const CalculateDistance = (array1, array2) => {
+    for(let i = 0; i < array1.length; i++){
+        distance.push(Math.abs(array1[i] - array2[i]));
+    }
+}
 
 const InsertData = (data) => {
     temp = data.split(/\r?\n/);
@@ -64,12 +76,46 @@ const InsertData = (data) => {
         right.push(split[1]);
     }
 }
-
-const InsertSort = (data, array) => {
-    for(let i = 0; i < array.length; i++){
-        
-    }
+const Swap = (array, index1, index2) =>{
+    //console.log("swapping: ", array[index1], array[index2])
+    let temp = array[index1];
+    array[index1] = array[index2];
+    array[index2] = temp;
 }
+
+const QuickSort = (array, lowIndex, highIndex) => {
+    
+    if(lowIndex >= highIndex) return;
+    let pivot = array[highIndex];
+
+    let leftPointer = lowIndex; 
+    let rightPointer = highIndex;
+    
+    while(leftPointer < rightPointer){
+        while(array[leftPointer] <= pivot && leftPointer < rightPointer){
+            leftPointer++;
+        }
+
+        while(array[rightPointer] >= pivot && leftPointer < rightPointer){
+            rightPointer--;
+        }
+        Swap(array, leftPointer, rightPointer);
+    }
+
+    Swap(array, leftPointer, highIndex);
+
+    QuickSort(array, lowIndex, leftPointer - 1);
+    QuickSort(array, leftPointer + 1, highIndex);
+}
+
+const Sum = (array) => {
+    let total = 0;
+    for(let i = 0; i < array.length; i++){
+        total = array[i] + total;
+    }
+    return total;
+}
+
 
 
 
