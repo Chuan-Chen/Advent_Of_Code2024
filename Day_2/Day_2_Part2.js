@@ -54,7 +54,7 @@ const  file = fs.readFile(filePath, 'utf8', (err , data ) => {
     InsertData(data);
     let array = [ '23', '21', '19', '16', '41' ];
     console.log(CalculateTotalSafety(matrix));
-    //console.log(isSafe(array));
+    console.log(array.pop());
 });
 
 const InsertData = (data) => {
@@ -110,5 +110,5 @@ const CalculateTotalSafety = (array) => {
 }
 
 const Pop = (array) => {
-    
+    console
 }
