@@ -73,7 +73,7 @@ const isSafe = (array) => {
     for(let i = 0; i < array.length - 1; i++){
         let currentMinNext = Number(array[i]) - Number(array[i+1]);
 
-        console.log(direction , currentMinNext >= -3 && currentMinNext <= -1, currentMinNext)
+        //console.log(direction , currentMinNext >= -3 && currentMinNext <= -1, currentMinNext)
         if(direction && currentMinNext >= -3 && currentMinNext <= -1){
             safe = true;
         }else if(!direction && currentMinNext <= 3 && currentMinNext >= 1) {
@@ -82,6 +82,7 @@ const isSafe = (array) => {
             return false;
         }
     }
+    //console.log(safe);
     return safe;
 }
 
